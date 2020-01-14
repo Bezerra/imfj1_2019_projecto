@@ -67,8 +67,8 @@ def main():
                 # Exits the application immediately
                 return
             elif (event.type == pygame.KEYDOWN):
-                if (event.key == pygame.K_ESCAPE):
-                    return
+               if (event.key == pygame.K_ESCAPE):
+                  return
 
         # Clears the screen with a very dark blue (0, 0, 20)
         screen.fill((0,0,0))

@@ -30,22 +30,29 @@ def main():
     # Moves the camera back 2 units
     scene.camera.position -= vector3(0,0,2)
 
-    # Create a cube and place it in a scene, at position (0,0,0)
-    # This cube has 1 unit of side, and is red
-    obj1 = Object3d("TestObject")
-    obj1.scale = vector3(1, 1, 1)
-    obj1.position = vector3(0, -1, 0)
-    obj1.mesh = Mesh.create_cube((1, 1, 1))
-    obj1.material = Material(color(1,0,0,1), "TestMaterial1")
+    # Object 1
+    #vertices
+    pyramidVerts = []
+    pyramidVerts.append(vector3(0.5, -0.3, -0.5))
+    pyramidVerts.append(vector3(0, 0.6, -0.5))
+    pyramidVerts.append(vector3(-0.5, -0.3, -0.5))
+    pyramidVerts.append(vector3(0, 0, 0.52))
+
+    obj1 = Object3d("Pyramid")
+    obj1.position += vector3(0, 0, 0)
+    obj1.mesh = Mesh.create_pyramid(pyramidVerts)
+    obj1.material = Material(color(1,0,1,1), "TestMaterial1")
     scene.add_object(obj1)
 
-    # Create a second object, and add it as a child of the first object
-    # When the first object rotates, this one will also mimic the transform
-    obj2 = Object3d("ChildObject")
-    obj2.position += vector3(0, 0.75, 0)
-    obj2.mesh = Mesh.create_cube((0.5, 0.5, 0.5))
-    obj2.material = Material(color(0,1,0,1), "TestMaterial2")
+    # Object 2
+
+    obj2 = Object3d("Pyramid Son")
+    obj2.position += vector3(0, -1, 0)
+    obj2.scale = vector3(0.5, -0.5, 0.5)
+    obj2.mesh = Mesh.create_pyramid(pyramidVerts)
+    obj2.material = Material(color(0,0,1,1), "TestMaterial2")
     obj1.add_child(obj2)
+
 
     #initialize axis, angle, and velocity
     angle = 0

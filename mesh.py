@@ -1,5 +1,7 @@
 import pygame
+import json
 from vector3 import *
+
 
 class Mesh:
     def __init__(self, name = "UnknownMesh"):
@@ -60,4 +62,55 @@ class Mesh:
         mesh.polygons.append(poly)
 
         return mesh
-    
+
+    @staticmethod
+    def create_pyramid(vertex, mesh = None):
+        if (mesh == None):
+            mesh = Mesh("UnknownPyramid")
+
+        Mesh.create_triangle(vertex[0], vertex[1], vertex[2], mesh)
+        Mesh.create_triangle(vertex[0], vertex[1], vertex[3], mesh)
+        Mesh.create_triangle(vertex[0], vertex[2], vertex[3], mesh)
+        Mesh.create_triangle(vertex[1], vertex[2], vertex[3], mesh)
+
+        return mesh
+
+    @staticmethod
+    def create_from_json(filename, mesh = None):
+        if (mesh == None):
+            mesh = Mesh("UnknownMesh")
+
+        verts = []
+        faces = []
+
+        with open(filename) as json_file:
+            data = json.load(json_file)
+            for v in data['vertices']:
+                verts.append(vector3(v[0], v[1], v[2]))
+            for f in data['faces']:
+                faces.append(f)
+        
+        for f in faces:
+            Mesh.create_triangle(verts[f[0]-1], verts[f[1]-1], verts[f[2]-1])
+
+        return mesh
+
+
+    @staticmethod
+    def create_triangle(v1, v2, v3, mesh = None):
+        if (mesh == None):
+            mesh = Mesh("UnknownTri")
+        
+        poly = []
+        poly.append(v1)
+        poly.append(v2)
+        poly.append(v3)
+
+        print("face:")
+        print(v1)
+        print(v2)
+        print(v3)
+        
+        mesh.polygons.append(poly)
+
+        return mesh

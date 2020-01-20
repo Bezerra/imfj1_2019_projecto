@@ -1,4 +1,5 @@
 import numpy as np
+import constant
 from object3d import *
 
 class Camera(Object3d):
@@ -33,7 +34,7 @@ class Camera(Object3d):
         trans = np.identity(4)
         trans[3,0] = -self.position.x
         trans[3,1] = -self.position.y
-        trans[3,2] = -self.position.z    
+        trans[3,2] = -self.position.z
 
         qrot  = as_rotation_matrix(self.rotation.inverse())
         rotation_matrix = np.identity(4)
@@ -49,3 +50,9 @@ class Camera(Object3d):
         rotation_matrix[3,3] = 1
 
         return trans @ rotation_matrix
+
+    def get_facing(self):
+        return ((constant.Z_AXIS.to_np3() @ as_rotation_matrix(self.rotation)))
+
+    def get_side(self):
+        return (constant.X_AXIS.to_np3() @ as_rotation_matrix(self.rotation))

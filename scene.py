@@ -15,6 +15,15 @@ class Scene:
 
         clip_matrix = camera_matrix @ projection_matrix
 
+        toDraw = [] #TODO
+        # dict dist:obj
+        # sort by dist
+
         for obj in self.objects:
-            obj.render(screen, clip_matrix)
+            d = obj.position - self.camera.position
+            if(d.x >= obj.scale.x/2 or d.z >= obj.scale.z/2):
+                d.normalize()
+                dProduct = d.dot(vector3.from_np(self.camera.get_facing()).normalized())
+                if(dProduct > math.cos(self.camera.fov)):
+                    obj.render(screen, clip_matrix)
 

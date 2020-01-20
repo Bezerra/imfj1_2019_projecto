@@ -29,7 +29,8 @@ class Mesh:
                 
                 tpoly.append( ( screen.get_width() * 0.5 + vout[0] / vout[3], screen.get_height() * 0.5 - vout[1] / vout[3]) )
 
-            pygame.draw.polygon(screen, c, tpoly, material.line_width)
+            #pygame.draw.polygon(screen, c, tpoly, material.line_width)
+            pygame.draw.polygon(screen, c, tpoly)
 
 
     @staticmethod

@@ -3,8 +3,8 @@
 ## Student:
 - Pedro Albuquerque Bezerra
    - 21900974
-   - github.com/bezerra #TODO
-
+   - https://github.com/Bezerra/imfj1_2019_projecto
+  
 ## Part 1:
 - In this part, I duplicated the sample.py file and renamed it viewer.py.
 - I first modified the viewer.py to include events to key down and key up
